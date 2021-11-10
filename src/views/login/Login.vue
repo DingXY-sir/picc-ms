@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import {userLogin} from '../../api/index'
 export default {
   components: {},
   props: {},
@@ -34,7 +35,7 @@ export default {
         ],
         password:[
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 6, max: 18, message: '长度为 6 到 18 字符', trigger: 'blur' }
+          { min: 3, max: 18, message: '长度为 6 到 18 字符', trigger: 'blur' }
         ]
       }
     };
@@ -46,13 +47,19 @@ export default {
       this.$refs.loginForm.validate( async(valid) => {
           if (valid) {
             alert('submit!');
-            // const data = {
-            //   email:this.ruleForm.name,
-            //   password:this.ruleForm.password
-            // }
-            //const res = await flyCarInsurance(data)
+            const data ={
+              ucode:this.ruleForm.name,
+              upwd:this.ruleForm.password
+            }
+            const res = await userLogin(this.$qs.stringify(data))
+            if(res.code == 'ok') {
+              //存储token
+              this.$store.commit('setToken',res.session)
+              //跳转首页
+              this.$router.push('/home')
+            }
             
-            this.$router.push('/home')
+
           } else {
             console.log('error submit!!');
             return false;

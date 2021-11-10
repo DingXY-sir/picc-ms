@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    销售方法
+    非车险
   </div>
 </template>
 
