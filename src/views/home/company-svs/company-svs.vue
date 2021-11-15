@@ -46,11 +46,13 @@ export default {
         stime:this.time[0],
         etime:this.time[1]
       }
-      // 导出excel
-      const res = await companySvsRead(data)
-      const {row, column} = res.data
-      this.column = [...column]
-      this.row = [...row]
+      // 查询
+      const res = await companySvsRead(this.$qs.stringify(data))
+      const {row, column} = res
+      this.column = column
+      row.unshift("地市");
+      this.row = row
+      
     }
   },
   created() {},
