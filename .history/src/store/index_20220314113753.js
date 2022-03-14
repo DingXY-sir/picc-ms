@@ -19,9 +19,6 @@ export default new Vuex.Store({
   actions: {
     SETUSERINFO({ commit }, provide) {
       commit('setUserInfo',provide)
-    },
-    GETLOGINSTATE({ commit }, provide) {
-      commit('getLoginState',provide)
     }
   },
   modules: {
